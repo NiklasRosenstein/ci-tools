@@ -1,0 +1,25 @@
+#!/bin/bash
+#
+# Download Ninja (https://ninja-build.org) and unpack it into a specific
+# directory. Usage:
+#
+#     get-ninja v1.7.1 ~/bin
+#     export PATH=~/bin:$PATH
+
+VERSION=$1
+DIRECTORY=$2
+if [ "$TRAVIS_OS_NAME" == linux ] ; then
+  ZIPNAME=ninja-linux.zip
+elif [ "$TRAVIS_OS_NAME" == osx ] ; then
+  ZIPNAME=ninja-mac.zip
+else
+  echo "error: \$TRAVIS_OS_NAME=\"$TRAVIS_OS_NAME\" is not supported"
+  exit 1
+fi
+TEMPFILE=$(mktemp)_$ZIPNAME
+
+set -e
+curl -sLo $TEMPFILE https://github.com/ninja-build/ninja/releases/download/$VERSION/$ZIPNAME
+unzip -qod $DIRECTORY $TEMPFILE
+rm $TEMPFILE
+echo "installed Ninja-$VERSION to \"$DIRECTORY\""

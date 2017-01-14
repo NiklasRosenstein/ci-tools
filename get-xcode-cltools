@@ -1,0 +1,30 @@
+#!/bin/bash
+#
+# Download XCode CommandLineTools and install them using
+# xcode-cltools-installer [1] to a specified directory. Usage:
+#
+#     get-xcode-cltools xcode5.0-10.08-2013.09.18.dmg ~/xcode5
+#
+# Note that you can not source `~/xcode5/activate` in Travis, thus you
+# need to make sure that the build system uses the correct binaries
+# nevertheless, for example by exporting CC/CXX.
+#
+#     export CC=~/xcode5/usr/bin/clang
+#     export CXX=~/xcode5/usr/bin/clang++
+
+VERSION=$1
+DIRECTORY=$2
+TEMPDIR=$(mktemp -d)
+
+set -e
+
+# Download the XCode CommandLineTools disk image.
+curl -sLo "$TEMPDIR/xcode-$VERSION.dmg" https://public.niklasrosenstein.com/xcode-cltools/xcode-$VERSION.dmg
+
+# Clone xcode-cltools-installer.
+git clone https://github.com/NiklasRosenstein/xcode-cltools-installer.git "$TEMPDIR/xcode-cltools-installer"
+
+# Extract the CLTools.
+python "$TEMPDIR/xcode-cltools-installer/install" "$TEMPDIR/xcode-$VERSION.dmg" "$DIRECTORY";
+
+rm -rf $TEMPDIR
