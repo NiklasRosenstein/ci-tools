@@ -1,4 +1,29 @@
-# travis-tools
+# ci-tools
 
-This repository provides a bunch of scripts that can be used on Travis CI
-for convenience and reducing the complexity of the install process.
+This repository provides a bunch of convenience scripts that can be used in
+configurations for CI providers like [Travis CI] and [AppVeyor].
+
+  [Travis CI]: https://travis-ci.org/
+  [AppVeyor]: https://ci.appveyor.com/
+
+## Contents
+
+__`get-ninja`__ `version dir`
+
+> Download the [Ninja] build system of the specified *version* and place the
+> `ninja` binary into *dir*.
+>
+> __Availability__: Windows, Linux, OSX
+
+  [Ninja]: https://ninja-build.org
+
+__`get-xcode-cltools`__ `version dir`
+
+> Download an XCode CommandLineTools disk image and install it into *dir*. The
+> *version* must be a version string of the format `<XCODE>-<OSX>-<DATE>`, for
+> example `5.0-10.08-2013.09.18`. Available versions can be checked
+> [here][XCode Versions].
+>
+> __Availablity__: OSX
+
+  [XCode Versions]: https://github.com/NiklasRosenstein/xcode-cltools-installer/wiki/XCode-Versions
