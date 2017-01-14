@@ -17,9 +17,12 @@ else
   exit 1
 fi
 TEMPFILE=$(mktemp)_$ZIPNAME
+URL=https://github.com/ninja-build/ninja/releases/download/$VERSION/$ZIPNAME
 
 set -e
-curl -sSfLo $TEMPFILE https://github.com/ninja-build/ninja/releases/download/$VERSION/$ZIPNAME
+mkdir -p "$DIRECTORY"
+echo "Downloading \"$URL\" ..."
+curl -sSfLo $TEMPFILE $URL
 unzip -qod $DIRECTORY $TEMPFILE
 rm $TEMPFILE
 echo "installed Ninja-$VERSION to \"$DIRECTORY\""
