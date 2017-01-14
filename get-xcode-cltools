@@ -19,12 +19,16 @@ TEMPDIR=$(mktemp -d)
 set -e
 
 # Download the XCode CommandLineTools disk image.
-curl -sLo "$TEMPDIR/xcode-$VERSION.dmg" https://public.niklasrosenstein.com/xcode-cltools/xcode-$VERSION.dmg
+URL=https://public.niklasrosenstein.com/xcode-cltools/xcode$VERSION.dmg
+echo "Downloading \"$URL\" ..."
+curl -sSfL $URL -o "$TEMPDIR/xcode$VERSION.dmg"
 
 # Clone xcode-cltools-installer.
-git clone https://github.com/NiklasRosenstein/xcode-cltools-installer.git "$TEMPDIR/xcode-cltools-installer"
+echo "Cloning xcode-cltools-installer ..."
+git clone -q https://github.com/NiklasRosenstein/xcode-cltools-installer.git "$TEMPDIR/xcode-cltools-installer"
 
 # Extract the CLTools.
-python "$TEMPDIR/xcode-cltools-installer/install" "$TEMPDIR/xcode-$VERSION.dmg" "$DIRECTORY";
+echo "Extracing CommandLineTools to \"$DIRECTORY\" ..."
+python "$TEMPDIR/xcode-cltools-installer/install" -q "$TEMPDIR/xcode$VERSION.dmg" "$DIRECTORY";
 
 rm -rf $TEMPDIR
