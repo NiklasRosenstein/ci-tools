@@ -19,7 +19,7 @@ fi
 TEMPFILE=$(mktemp)_$ZIPNAME
 
 set -e
-curl -sLo $TEMPFILE https://github.com/ninja-build/ninja/releases/download/$VERSION/$ZIPNAME
+curl -sSfLo $TEMPFILE https://github.com/ninja-build/ninja/releases/download/$VERSION/$ZIPNAME
 unzip -qod $DIRECTORY $TEMPFILE
 rm $TEMPFILE
 echo "installed Ninja-$VERSION to \"$DIRECTORY\""
