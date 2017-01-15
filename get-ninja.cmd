@@ -22,7 +22,7 @@ if %errorlevel% neq 0 exit /B %errorlevel%
 REM Create the output directory and extract the archive.
 echo Unpacking ninja-win.zip ...
 mkdir "%DIRECTORY%"
-7z x "%TEMPFILE" "-o%DIRECTORY%"
+7z x "%TEMPFILE%" "-o%DIRECTORY%"
 if %errorlevel% neq 0 exit /B %errorlevel%
 
 del "%TEMPFILE%"
