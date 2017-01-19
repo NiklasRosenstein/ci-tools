@@ -19,7 +19,7 @@ TEMPDIR=$(mktemp -d)
 set -e
 
 # Download the XCode CommandLineTools disk image.
-URL=https://public.niklasrosenstein.com/xcode-cltools/xcode$VERSION.dmg
+URL=https://public.niklasrosenstein.com/software/xcode-cltools/xcode$VERSION.dmg
 echo "Downloading \"$URL\" ..."
 curl -sSfL $URL -o "$TEMPDIR/xcode$VERSION.dmg"
 
