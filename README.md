@@ -13,7 +13,13 @@ __`get-os-name`__
 > Determines the name of the current operating system. If the variable
 > `$TRAVIS_OS_NAME` is set, it will be returned as-is, otherwise the OS
 > name is infered from the `uname` command. On Windows, only the name
-> `MSYS_NT` is currently accepted.
+> `MSYS_NT` is currently accepted. This script should be used like this before
+> using any of the other CI scripts
+>
+>     set -e
+>     export CI_OS_NAME=$(get-os-name)
+>
+> as they might require the $CI_OS_NAME variable.
 >
 > Echos to stdout one of the following: `windows`, `linux`, `osx`
 >
@@ -22,7 +28,7 @@ __`get-os-name`__
 __`get-ninja`__ `version dir`
 
 > Download the [Ninja] build system of the specified *version* and place the
-> `ninja` binary into *dir*.
+> `ninja` binary into *dir*. The bash version requires `$CI_OS_NAME` set.
 >
 > __Availability__: Windows, Linux, OSX
 

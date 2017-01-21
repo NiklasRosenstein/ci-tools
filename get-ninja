@@ -9,16 +9,15 @@
 set -e
 VERSION=$1
 DIRECTORY=$2
-OS_NAME=$("$(dirname -- "$0")/get-os-name")
 
-if [ "$OS_NAME" == "linux" ]; then
+if [ "$CI_OS_NAME" == "linux" ]; then
   ZIPNAME=ninja-linux.zip
-elif [ "$OS_NAME" == "osx" ]; then
+elif [ "$CI_OS_NAME" == "osx" ]; then
   ZIPNAME=ninja-mac.zip
-elif [ "$OS_NAME" == "windows" ]; then
+elif [ "$CI_OS_NAME" == "windows" ]; then
   ZIPNAME=ninja-win.zip
 else
-  echo "error: \$TRAVIS_OS_NAME=\"$TRAVIS_OS_NAME\" is not supported"
+  echo "error: \$CI_OS_NAME=\"$CI_OS_NAME\" is not supported"
   exit 1
 fi
 TEMPFILE=$(mktemp)_$ZIPNAME
