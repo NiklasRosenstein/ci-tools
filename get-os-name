@@ -1,0 +1,17 @@
+#!/bin/bash
+#
+# A helper script which either prints the value of the variable $TRAVIS_OS_NAME
+# or infers it from the platform if it is not set.
+
+if [ -z "$TRAVIS_OS_NAME" ]; then
+  if [ "$(uname)" == "Linux" ]; then echo "linux";
+  elif [ "$(uname)" == "Darwin" ]; then echo "osx";
+  elif [[ "$(uname)" == MSYS_NT* ]]; then echo "windows";
+  else
+    (>&2 echo "get-os-name: could not infer \$TRAVIS_OS_NAME from uname: $(uname)");
+    exit 1
+  fi
+else
+  echo "$TRAVIS_OS_NAME"
+fi
+exit 0

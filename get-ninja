@@ -6,12 +6,17 @@
 #     get-ninja v1.7.1 ~/bin
 #     export PATH=~/bin:$PATH
 
+set -e
 VERSION=$1
 DIRECTORY=$2
-if [ "$TRAVIS_OS_NAME" == linux ] ; then
+OS_NAME=$("$(dirname -- "$0")/get-os-name")
+
+if [ "$OS_NAME" == "linux" ]; then
   ZIPNAME=ninja-linux.zip
-elif [ "$TRAVIS_OS_NAME" == osx ] ; then
+elif [ "$OS_NAME" == "osx" ]; then
   ZIPNAME=ninja-mac.zip
+elif [ "$OS_NAME" == "windows" ]; then
+  ZIPNAME=ninja-win.zip
 else
   echo "error: \$TRAVIS_OS_NAME=\"$TRAVIS_OS_NAME\" is not supported"
   exit 1

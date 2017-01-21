@@ -8,6 +8,17 @@ configurations for CI providers like [Travis CI] and [AppVeyor].
 
 ## Contents
 
+__`get-os-name`__
+
+> Determines the name of the current operating system. If the variable
+> `$TRAVIS_OS_NAME` is set, it will be returned as-is, otherwise the OS
+> name is infered from the `uname` command. On Windows, only the name
+> `MSYS_NT` is currently accepted.
+>
+> Echos to stdout one of the following: `windows`, `linux`, `osx`
+>
+> __Availability__: Windows (Bash), Linux, OSX
+
 __`get-ninja`__ `version dir`
 
 > Download the [Ninja] build system of the specified *version* and place the
